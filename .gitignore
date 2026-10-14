@@ -1,0 +1,9 @@
+.DS_Store
+**/.DS_Store
+
+# Local dependencies and build output
+**/node_modules/
+**/.output/
+**/.wrangler/
+**/dist/
+**/.env*

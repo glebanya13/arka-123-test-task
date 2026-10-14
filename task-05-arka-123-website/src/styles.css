@@ -1,0 +1,154 @@
+@import "tailwindcss" source(none);
+@source "../src";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --font-display: "Cormorant Garamond", "Times New Roman", serif;
+  --font-sans: "Manrope", system-ui, sans-serif;
+  --radius-sm: calc(var(--radius) - 2px);
+  --radius-md: var(--radius);
+  --radius-lg: var(--radius);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-graphite: var(--graphite);
+  --color-graphite-soft: var(--graphite-soft);
+  --color-ivory: var(--ivory);
+  --color-wood: var(--wood);
+  --color-wood-deep: var(--wood-deep);
+  --color-stone: var(--stone);
+}
+
+:root {
+  --radius: 0px;
+  --graphite: #203642;
+  --graphite-soft: #2f4a57;
+  --ivory: #f5f8f9;
+  --stone: #e5ecef;
+  --wood: #9bb8c2;
+  --wood-deep: #607f8b;
+
+  --background: var(--ivory);
+  --foreground: var(--graphite);
+  --card: #edf3f5;
+  --card-foreground: var(--graphite);
+  --popover: var(--ivory);
+  --popover-foreground: var(--graphite);
+  --primary: var(--graphite);
+  --primary-foreground: var(--ivory);
+  --secondary: var(--stone);
+  --secondary-foreground: var(--graphite);
+  --muted: var(--stone);
+  --muted-foreground: #5e747d;
+  --accent: var(--wood);
+  --accent-foreground: var(--graphite);
+  --destructive: oklch(0.52 0.17 30);
+  --destructive-foreground: var(--ivory);
+  --border: rgb(32 54 66 / 16%);
+  --input: rgb(32 54 66 / 30%);
+  --ring: var(--wood-deep);
+}
+
+@layer base {
+  * {
+    border-color: var(--color-border);
+  }
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+  }
+  ::selection {
+    background: var(--wood);
+    color: var(--graphite);
+  }
+  :focus-visible {
+    outline: 2px solid var(--ring);
+    outline-offset: 3px;
+  }
+}
+
+@utility arch {
+  border-radius: 9999px 9999px 0 0;
+}
+@utility font-display {
+  font-family: var(--font-display);
+  font-weight: 400;
+  letter-spacing: -0.02em;
+}
+@utility eyebrow {
+  font-family: var(--font-sans);
+  font-size: 0.7rem;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+}
+@utility placeholder-photo {
+  background:
+    repeating-linear-gradient(135deg, transparent 0 14px, oklch(0.2 0.006 60 / 5%) 14px 15px),
+    linear-gradient(160deg, var(--stone), oklch(0.84 0.03 70));
+}
+@utility placeholder-dark {
+  background:
+    repeating-linear-gradient(135deg, transparent 0 14px, oklch(0.965 0.012 85 / 4%) 14px 15px),
+    linear-gradient(160deg, var(--graphite-soft), var(--graphite));
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition:
+    opacity 1s ease,
+    transform 1s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+.reveal.is-in {
+  opacity: 1;
+  transform: none;
+}
+.animate-rise {
+  animation: rise 1.2s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .reveal,
+  .animate-rise {
+    opacity: 1;
+    transform: none;
+    animation: none;
+    transition: none;
+  }
+}
